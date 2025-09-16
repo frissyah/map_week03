@@ -42,8 +42,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // Tambahan untuk Part 3 (Dynamic Fragment)
     implementation(libs.androidx.navigation.fragment.ktx)
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
