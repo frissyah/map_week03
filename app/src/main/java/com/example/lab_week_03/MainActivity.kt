@@ -6,30 +6,36 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-// Listener interface untuk komunikasi fragment → activity
+// Listener untuk komunikasi ListFragment -> MainActivity -> DetailFragment
 interface CoffeeListener {
     fun onSelected(id: Int)
 }
 
 class MainActivity : AppCompatActivity(), CoffeeListener {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        // Atur padding agar layout tidak tertutup system bar
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.fragment_container)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // Tambahkan ListFragment pertama kali
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ListFragment())
+                .commit()
+        }
     }
 
-    // Implementasi CoffeeListener → dipanggil dari ListFragment
     override fun onSelected(id: Int) {
-        val detailFragment = supportFragmentManager
-            .findFragmentById(R.id.fragment_detail) as DetailFragment
-        detailFragment.setCoffeeData(id)
+        val detailFragment = DetailFragment.newInstance(id)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, detailFragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
