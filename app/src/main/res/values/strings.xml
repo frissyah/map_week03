@@ -11,4 +11,11 @@
 
     <string name="latte_title">CAFFE LATTE</string>
     <string name="latte_desc">Espresso with steamed milk and foam. Served in a latte glass.</string>
+
+    <string name="mocha_title">MOCHA</string>
+    <string name="mocha_desc">Espresso with chocolate syrup and steamed milk. Served in a coffee cup.</string>
+
+    <string name="espresso_title">ESPRESSO</string>
+    <string name="espresso_desc">Strong black coffee made by forcing steam through ground coffee beans.</string>
+
 </resources>
